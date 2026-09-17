@@ -1,0 +1,23 @@
+{
+  "name": "pi-feishu-tool",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "PI + 飞书远程 Coding Agent。飞书是控制面，Gateway 是调度面，PI 是执行面，Git 是状态面。",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/index.ts",
+    "feishu": "node --disable-warning=ExperimentalWarning src/index.ts --feishu",
+    "task": "node --disable-warning=ExperimentalWarning src/index.ts --task",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "^1.74.0"
+  }
+}

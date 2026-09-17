@@ -1,0 +1,94 @@
+{
+  "feishu": {
+    "enabled": false,
+    "appId": "",
+    "appSecret": "",
+
+    "allowedOpenIds": [],
+    "allowedChatIds": [],
+
+    "progress": true,
+    "requireMentionInGroup": true,
+    "dedupeWindowSeconds": 600,
+    "catchUpOnReconnect": true,
+    "sdkLogLevel": "quiet"
+  },
+
+  "pi": {
+    "_说明": "pi@2.0.5（CLI 报 0.85.1）的真实契约：pi --print --no-session --model <id> @<promptFile>。--print 是非交互模式，缺了它会卡在 TTY 上；@ 前缀把 prompt 文件作为消息喂进去。",
+    "mode": "rpc",
+    "command": "pi",
+    "argsTemplate": ["--print", "--no-session", "--approve", "--model", "{{model}}", "@{{promptFile}}"],
+    "model": "deepseek/deepseek-flash",
+    "rpcUrl": "http://127.0.0.1:31415",
+    "promptFilePath": "data/prompts/{{taskId}}.md",
+    "rpcSessionDir": "data/pi-sessions",
+    "sessionPer": "project",
+    "_questionTimeoutSeconds": "等人工回答的时限（秒）。设 0 = 不单独设限，一直等到任务总超时。等人回答的时间不计入任务预算",
+    "questionTimeoutSeconds": 3600,
+    "_pathPrepend": "PI 的可执行文件不在默认 PATH 里时，把它的 bin 目录填进来（nvm 装的命令就属于这种）。本机路径请写在 config.local.json 里覆盖，别提交到仓库",
+    "pathPrepend": [],
+    "env": {},
+    "probeArgs": ["--help"]
+  },
+
+  "worker": {
+    "maxWorkers": 1,
+    "_defaultTimeout": "任务总超时（秒）。这是 PI 干活的预算，等人工回答的时间不占它。大任务给足",
+    "defaultTimeout": 7200,
+    "mockStepMs": 120,
+    "mockWriteFiles": false
+  },
+
+  "git": {
+    "_enabled": "false = 隐身模式：不建任务分支、不提交、不推送，仓库里不会留下任何机器人痕迹（只读的 status/diff 保留，用于告诉你改了哪些文件）。需要提交时改回 true",
+    "enabled": false,
+    "autoCommit": true,
+    "autoPush": false,
+    "branchPrefix": "pi/",
+    "taskBranch": true
+  },
+
+  "schedule": {
+    "_说明": "定时任务（/setTime）。状态存 SQLite，重启不丢；进程启动时补跑宽限窗口内错过的，超过窗口的标记为 missed",
+    "enabled": true,
+    "tickSeconds": 15,
+    "missedGraceSeconds": 900
+  },
+
+  "gateway": {
+    "enabled": false,
+    "host": "127.0.0.1",
+    "port": 31416,
+    "token": ""
+  },
+
+  "security": {
+    "allowOutsideWorkspace": false,
+    "defaultLevel": 2,
+    "blockedPaths": [
+      ".env",
+      ".env.*",
+      "*.pem",
+      "*.key",
+      "*.p12",
+      "*.keystore",
+      "credentials.*",
+      "secrets.*",
+      "id_rsa",
+      "id_ed25519",
+      ".npmrc",
+      ".netrc",
+      ".git-credentials"
+    ],
+    "blockedCommands": [
+      "git push --force",
+      "git push -f",
+      "git reset --hard",
+      "git clean -fd",
+      "git clean -f",
+      "rm -rf /",
+      "sudo rm"
+    ]
+  }
+}

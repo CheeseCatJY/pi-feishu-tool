@@ -1,0 +1,20 @@
+# 运行时产物
+data/
+logs/
+
+# 本地覆盖配置：放飞书 appId / appSecret 等密钥，不要提交
+config.local.json
+
+# 项目注册表：路径指向你本机（常是公司项目），不提交；模板见 projects.example.json
+projects.json
+
+# Agent 工作记忆：含本机路径、会话与项目内情，不提交
+.workbuddy/
+
+# 冒烟测试用的样例项目（它自己是一个独立 git 仓库）
+examples/demo-project/
+
+# 依赖与系统文件
+node_modules/
+.DS_Store
+*.log

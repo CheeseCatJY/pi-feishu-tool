@@ -1,0 +1,28 @@
+{
+  "_说明": "复制成 projects.json 后填写。真正的 projects.json 已 gitignore——它通常指向本机的公司项目路径，不该提交。",
+  "_字段": {
+    "id": "简短代号，/project <id> 用它。只能用字母数字和 - _ .（会被用作 PI 会话 id 的一部分，非法字符会被规范化）",
+    "name": "人类可读的名字，只用于展示",
+    "path": "项目绝对路径，也支持 ~/ 和相对路径",
+    "defaultBranch": "任务结束后切回的分支；不填则用任务开始时的当前分支",
+    "defaultLevel": "默认执行等级：1 只读 / 2 开发（可改代码并提交）/ 3 自动化",
+    "verify": "验证步骤。强烈建议填写——这是拦住「PI 说改好了但实际跑不起来」的唯一闸门，验证不通过就不提交。系统不会自动猜你的测试命令"
+  },
+
+  "projects": [
+    {
+      "id": "demo",
+      "name": "Demo Project",
+      "path": "./examples/demo-project",
+      "defaultBranch": "main",
+      "defaultLevel": 2,
+      "verify": [
+        {
+          "type": "test",
+          "command": "node --test test/**/*.test.js",
+          "timeout": 120
+        }
+      ]
+    }
+  ]
+}

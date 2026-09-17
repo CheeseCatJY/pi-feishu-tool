@@ -1,0 +1,34 @@
+{
+  "_说明": "复制成 config.local.json 后填写。config.local.json 已加入 .gitignore，不会进提交。也可以用环境变量 FEISHU_APP_ID / FEISHU_APP_SECRET 覆盖。注意：本示例文件本身是要进提交的，千万别在这里填真实凭据。",
+
+  "feishu": {
+    "enabled": true,
+
+    "appId": "cli_xxxxxxxxxxxxxxxx",
+    "appSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+
+    "_allowedOpenIds": "说明：这是注释字段，程序不读它。真正的放行名单是下面那个数组。第一次接入时机器人会回显你的 open_id，把它填进去再重启。留空 = 观察模式，不执行任何任务。",
+    "allowedOpenIds": [],
+
+    "_allowedChatIds": "可留空。填写后只响应这些会话",
+    "allowedChatIds": []
+  },
+
+  "_pi": "PI 的可执行文件不在默认 PATH 里时（比如装在 nvm 目录下），把它的 bin 目录填进 pi.pathPrepend。下面 _pi模板 是参考，改名为 pi 才生效",
+  "_pi模板": {
+    "mode": "rpc",
+    "command": "pi",
+    "model": "provider/model-id",
+    "pathPrepend": ["/path/to/.nvm/versions/node/v24.x.x/bin"],
+    "_argsTemplate": "只在 mode = cli 时生效；rpc 模式走 stdin/stdout 的 JSON 协议，不用它",
+    "argsTemplate": ["--print", "--no-session", "--approve", "--model", "{{model}}", "@{{promptFile}}"]
+  },
+
+  "_gateway": "本机 HTTP API（文档 17 节）。把下面 _gateway模板 改名为 gateway 生效。只绑 127.0.0.1，REPL / 飞书模式都会挂上",
+  "_gateway模板": {
+    "enabled": true,
+    "port": 31416,
+    "_token": "非空则所有接口要求 Authorization: Bearer <token>",
+    "token": ""
+  }
+}
